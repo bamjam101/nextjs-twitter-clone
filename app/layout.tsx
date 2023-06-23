@@ -2,6 +2,8 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import FollowBar from "@/components/followbar/FollowBar";
+import LoginModal from "@/components/modal/LoginModal";
+import RegisterModal from "@/components/modal/RegisterModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <LoginModal />
+      <RegisterModal />
       <body className={`min-h-screen text-white ${inter.className}`}>
         <div className="container h-full mx-auto xl:px-30 max-w-full">
           <div className="grid grid-cols-4 h-full">
