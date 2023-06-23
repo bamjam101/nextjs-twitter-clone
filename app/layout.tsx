@@ -1,9 +1,14 @@
-import Sidebar from "@/components/sidebar/Sidebar";
 import "./globals.css";
 import { Inter } from "next/font/google";
+
+import { Toaster } from "react-hot-toast";
+
 import FollowBar from "@/components/followbar/FollowBar";
+import Sidebar from "@/components/sidebar/Sidebar";
 import LoginModal from "@/components/modal/LoginModal";
 import RegisterModal from "@/components/modal/RegisterModal";
+import AuthContext from "@/context/AuthContext";
+import ToasterContext from "@/context/ToasterContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,19 +24,30 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <LoginModal />
-      <RegisterModal />
-      <body className={`min-h-screen text-white ${inter.className}`}>
-        <div className="container h-full mx-auto xl:px-30 max-w-full">
-          <div className="grid grid-cols-4 h-full">
-            <Sidebar />
-            <div className="col-span-3 lg:col-span-2 border-x-[1px] border-neutral-500/30">
-              {children}
+      <AuthContext>
+        <body className={`min-h-screen text-white ${inter.className}`}>
+          {/* Provides toast notification to end-user */}
+          <ToasterContext />
+          {/* Modals to facilitate form view for signing in and registration */}
+          <LoginModal />
+          <RegisterModal />
+          <div className="container h-full mx-auto xl:px-30 max-w-full">
+            <div className="grid grid-cols-4 h-full">
+              {/* Sidebar section present on the left hand side ---> Built with Mobile first approach */}
+              <Sidebar />
+
+              {/* ---------Main--------- */}
+              <div className="col-span-3 lg:col-span-2 border-x-[1px] border-neutral-500/30">
+                {children}
+              </div>
+              {/* ---------Main--------- */}
+
+              {/* Follow section present on the right hand side */}
+              <FollowBar />
             </div>
-            <FollowBar />
           </div>
-        </div>
-      </body>
+        </body>
+      </AuthContext>
     </html>
   );
 }
