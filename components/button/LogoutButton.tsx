@@ -1,33 +1,26 @@
 "use client";
+
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
-import useLoginModal from "@/hooks/useLoginModal";
-import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
-interface SiderbarItemProps {
-  href?: string;
-  label: string;
+interface LogoutButtonProps {
   icon: any;
-  currentUser?: User | null;
 }
 
-const SidebarItem: React.FC<SiderbarItemProps> = ({
-  href,
-  label,
-  icon,
-  currentUser,
-}) => {
+const LogoutButton: React.FC<LogoutButtonProps> = ({ icon }) => {
   const router = useRouter();
-  const loginModal = useLoginModal();
-
   const handleClick = useCallback(() => {
-    if (!currentUser?.id && href !== "/") {
-      loginModal.onOpen();
+    try {
+      signOut();
+      toast.success("Successfully Signed Out");
+      router.push("/");
+    } catch (error) {
+      toast.error("Something went wrong!");
     }
-    if (currentUser?.id && href) {
-      router.push(href);
-    }
-  }, [router, href, currentUser, loginModal]);
+  }, [router]);
+
   return (
     <div
       onClick={handleClick}
@@ -38,10 +31,10 @@ const SidebarItem: React.FC<SiderbarItemProps> = ({
       </div>
       <div className="relative hidden lg:flex gap-4 items-center rounded-full p-4 hover:bg-slate-300 hover:bg-opacity-10 cursor-pointer">
         {icon}
-        <p className="hidden lg:block text-white text-xl">{label}</p>
+        <p className="hidden lg:block text-white text-xl">Logout</p>
       </div>
     </div>
   );
 };
 
-export default SidebarItem;
+export default LogoutButton;

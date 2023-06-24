@@ -4,23 +4,26 @@ import { BiLogOut } from "react-icons/bi";
 import SidebarLogo from "./SidebarLogo";
 import SidebarItem from "./SidebarItem";
 import SidebarTweetButton from "./SidebarTweetButton";
+import getCurrentUser from "@/actions/getCurrentUser";
+import LogoutButton from "../button/LogoutButton";
 
-const Sidebar = () => {
+const Sidebar = async () => {
+  const currentUser = await getCurrentUser();
   const items = [
     {
       label: "Home",
       href: "/",
-      icon: BsHouseFill,
+      icon: <BsHouseFill size={28} color="white" />,
     },
     {
       label: "Notification",
       href: "/notification",
-      icon: BsBellFill,
+      icon: <BsBellFill size={28} color="white" />,
     },
     {
       label: "Profile",
       href: "/users/123",
-      icon: FaUser,
+      icon: <FaUser size={28} color="white" />,
     },
   ];
   return (
@@ -30,13 +33,16 @@ const Sidebar = () => {
           <SidebarLogo />
           {items.map((item) => (
             <SidebarItem
+              currentUser={currentUser}
               key={item.href}
               href={item.href}
               label={item.label}
               icon={item.icon}
             />
           ))}
-          <SidebarItem onClick={() => {}} icon={BiLogOut} label={"Logout"} />
+          {currentUser && (
+            <LogoutButton icon={<BiLogOut size={24} color="white" />} />
+          )}
           <SidebarTweetButton />
         </div>
       </div>
