@@ -28,7 +28,10 @@ const UserView = async ({ params }: { params: IParams }) => {
   return (
     <>
       <Header showBackArrow label={user?.name} />
-      <UserHero coverImage={user?.coverImage} profileImage={user?.image} />
+      <UserHero
+        coverImage={user?.coverImage}
+        profileImage={user?.profileImage}
+      />
       <UserBio
         user={user}
         currentUser={currentUser as User}

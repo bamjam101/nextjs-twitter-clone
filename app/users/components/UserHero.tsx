@@ -1,5 +1,4 @@
 import Avatar from "@/components/avatar/Avatar";
-import { User } from "@prisma/client";
 import Image from "next/image";
 import React from "react";
 
@@ -21,7 +20,11 @@ const UserHero: React.FC<UserHeroProps> = ({ coverImage, profileImage }) => {
           }}
         />
         <div className="absolute -bottom-16 left-4 rounded-full bg-black">
-          <Avatar isLarge hasBorder />
+          <Avatar
+            profile={(profileImage as string) || undefined}
+            isLarge
+            hasBorder
+          />
         </div>
       </div>
     </div>

@@ -4,7 +4,8 @@ import { NextResponse } from "next/server";
 export async function PATCH(request: Request) {
   try {
     const currentUser = await getCurrentUser();
-    const { name, username, bio, profileImage, coverImage } = reques.body;
+    const body = await request.json();
+    const { name, username, bio, profileImage, coverImage } = body;
 
     if (!name || !username) {
       return new NextResponse("Missing Fields", { status: 400 });
