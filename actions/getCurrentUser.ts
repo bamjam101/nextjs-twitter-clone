@@ -20,6 +20,14 @@ const getCurrentUser = async () => {
       return null;
     }
 
+    // const followersCount = await prisma.user.count({
+    //   where: {
+    //     followingIds: {
+    //       has: currentUser.id,
+    //     },
+    //   },
+    // });
+
     return currentUser;
   } catch (error) {
     return null;

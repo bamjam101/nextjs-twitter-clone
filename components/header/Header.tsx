@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation";
 import { BiArrowBack } from "react-icons/bi";
 
 interface HeaderProps {
-  label: string;
-  showBackError?: boolean;
+  label: string | null;
+  showBackArrow?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ label, showBackError }) => {
+const Header: React.FC<HeaderProps> = ({ label, showBackArrow }) => {
   const router = useRouter();
 
   const handleBack = useCallback(() => {
@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ label, showBackError }) => {
   return (
     <div className="border-b-[1px] border-neutral-800 p-5">
       <div className="flex flex-row items-center gap-2">
-        {showBackError && (
+        {showBackArrow && (
           <BiArrowBack
             onClick={handleBack}
             color="white"

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
 interface AvatarProps {
-  userId: string;
+  userId?: string;
   profile?: string;
   isLarge?: boolean;
   hasBorder?: boolean;
@@ -29,6 +29,7 @@ const Avatar: React.FC<AvatarProps> = async ({
   );
   return (
     <div
+      onClick={userId ? handleClick : () => {}}
       className={`
   ${hasBorder ? "border-4 border-black" : ""}
   ${isLarge ? "h-32 w-32" : "h-12 w-12"}
@@ -47,7 +48,6 @@ const Avatar: React.FC<AvatarProps> = async ({
           borderRadius: "100%",
         }}
         alt="Avatar"
-        onClick={handleClick}
       />
     </div>
   );

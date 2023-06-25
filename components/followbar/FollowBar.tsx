@@ -1,5 +1,4 @@
-import getUsers from "@/hooks/useUsers";
-import Avatar from "../avatar/Avatar";
+import getUsers from "@/actions/useUsers";
 import UserList from "@/app/components/UserList";
 
 const FollowBar = async () => {

@@ -1,21 +1,18 @@
 "use client";
 
-import useRegisterModal from "@/hooks/useRegisterModal";
+import useLoginModal from "@/hooks/useLoginModal";
 
 import { useState, useCallback } from "react";
 import Input from "../input/Input";
 import Modal from "./Modal";
-import useLoginModal from "@/hooks/useLoginModal";
-import axios from "axios";
-import { toast } from "react-hot-toast";
+import useRegisterModal from "@/hooks/useRegisterModal";
 import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
-const RegisterModal = () => {
+const LoginModal = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
 
-  const [name, setName] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -25,50 +22,29 @@ const RegisterModal = () => {
       return;
     }
 
-    registerModal.onClose();
-    loginModal.onOpen();
+    loginModal.onClose();
+    registerModal.onOpen();
   }, [isLoading, registerModal, loginModal]);
 
   const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true);
-      // Sign Up and Log In
-      await axios.post("/api/register", {
-        email,
-        password,
-        username,
-        name,
-      });
-      toast.success("Account created.");
-
-      signIn("credentials", {
+      // Sign In
+      await signIn("credentials", {
         email,
         password,
       });
-
-      registerModal.onClose();
+      toast.success("Login Successfull.");
+      loginModal.onClose();
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong!");
     } finally {
       setIsLoading(false);
     }
-  }, [registerModal, name, email, password, username]);
+  }, [loginModal, email, password]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Input
-        placeholder="Name"
-        onChange={(event) => setName(event.target.value)}
-        value={name}
-        disabled={isLoading}
-      />
-      <Input
-        placeholder="Username"
-        onChange={(event) => setUsername(event.target.value)}
-        value={username}
-        disabled={isLoading}
-      />
       <Input
         placeholder="Email"
         onChange={(event) => setEmail(event.target.value)}
@@ -88,12 +64,12 @@ const RegisterModal = () => {
   const footerContent = (
     <div className="text-neutral-400 text-center mt-4">
       <div className="text-base">
-        Already have an account?{" "}
+        First time using Twitter?{" "}
         <span
           onClick={onToggle}
           className="text-white cursor-pointer hover:underline"
         >
-          Sign In
+          Create an account
         </span>
       </div>
     </div>
@@ -101,10 +77,10 @@ const RegisterModal = () => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={registerModal.isOpen}
-      title="Create an account"
-      actionLabel="Register"
-      onClose={registerModal.onClose}
+      isOpen={loginModal.isOpen}
+      title="Login"
+      actionLabel="Sign In"
+      onClose={loginModal.onClose}
       onSubmit={onSubmit}
       body={bodyContent}
       footer={footerContent}
@@ -112,4 +88,4 @@ const RegisterModal = () => {
   );
 };
 
-export default RegisterModal;
+export default LoginModal;
