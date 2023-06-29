@@ -1,11 +1,11 @@
 "use client";
 
-import useLoginModal from "@/hooks/useLoginModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
 
 import { useState, useCallback } from "react";
 import Input from "../input/Input";
 import Modal from "./Modal";
-import useRegisterModal from "@/hooks/useRegisterModal";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 

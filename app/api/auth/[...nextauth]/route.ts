@@ -3,8 +3,7 @@ import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-import prisma from "@/libs/prismadb";
-import { NextResponse } from "next/server";
+import prisma from "@/app/libs/prismadb";
 import { AuthOptions } from "next-auth";
 
 export const authOptions: AuthOptions = {
@@ -47,9 +46,6 @@ export const authOptions: AuthOptions = {
   debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
-  },
-  jwt: {
-    secret: process.env.NEXTAUTH_JWT_SECRET,
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

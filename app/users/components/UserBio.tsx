@@ -1,16 +1,17 @@
 "use client";
+import { useMemo } from "react";
+import { format } from "date-fns";
+import { User } from "@prisma/client";
+
+import { BiCalendar } from "react-icons/bi";
 
 import Button from "@/components/button/Button";
-import useEditModal from "@/hooks/useEditModal";
-import { User } from "@prisma/client";
-import { format } from "date-fns";
-import { useMemo } from "react";
-import { BiCalendar } from "react-icons/bi";
+import useEditModal from "@/app/hooks/useEditModal";
 
 interface UserBioProps {
   user: User;
   currentUser: User;
-  count: string;
+  count?: string;
 }
 
 const UserBio: React.FC<UserBioProps> = ({
@@ -55,7 +56,7 @@ const UserBio: React.FC<UserBioProps> = ({
               <p className="text-neutral-500">Following</p>
             </div>
             <div className="flex flex-row items-center gap-1">
-              <p className="text-white">{followersCount}</p>
+              <p className="text-white">{followersCount && followersCount}</p>
               <p className="text-neutral-500">Followers</p>
             </div>
           </div>

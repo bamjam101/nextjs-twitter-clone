@@ -1,4 +1,4 @@
-import getUsers from "@/actions/useUsers";
+import getUsers from "@/app/actions/useUsers";
 import UserList from "@/app/components/UserList";
 
 const FollowBar = async () => {

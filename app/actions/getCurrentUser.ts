@@ -1,5 +1,4 @@
-import prisma from "@/libs/prismadb";
-
+import prisma from "@/app/libs/prismadb";
 import getSession from "./getSession";
 
 const getCurrentUser = async () => {
@@ -19,14 +18,6 @@ const getCurrentUser = async () => {
     if (!currentUser) {
       return null;
     }
-
-    // const followersCount = await prisma.user.count({
-    //   where: {
-    //     followingIds: {
-    //       has: currentUser.id,
-    //     },
-    //   },
-    // });
 
     return currentUser;
   } catch (error) {

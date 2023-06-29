@@ -1,11 +1,14 @@
-import Header from "@/components/header/Header";
-import getUserById from "@/actions/getUserById";
 import React from "react";
-import { ClipLoader } from "react-spinners";
+
+import Header from "@/components/header/Header";
 import UserHero from "../components/UserHero";
 import UserBio from "../components/UserBio";
-import getCurrentUser from "@/actions/getCurrentUser";
+
+import { ClipLoader } from "react-spinners";
+
 import { User } from "@prisma/client";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import getUserById from "@/app/actions/getUserById";
 
 interface IParams {
   userId: string;
@@ -33,9 +36,9 @@ const UserView = async ({ params }: { params: IParams }) => {
         profileImage={user?.profileImage}
       />
       <UserBio
-        user={user}
+        user={user as User}
         currentUser={currentUser as User}
-        count={user.followersCount.toString()}
+        // count={user.followersCount.toString()}
       />
     </>
   );

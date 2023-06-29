@@ -27,10 +27,10 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ icon }) => {
       className="flex flex-col items-end lg:items-start"
     >
       <div className="relative rounded-full h-14 w-14 flex items-center justify-center p-4 hover:bg-slate-300 hover:bg-opacity-10 cursor-pointer lg:hidden">
-        {icon}
+        {icon && icon}
       </div>
       <div className="relative hidden lg:flex gap-4 items-center rounded-full p-4 hover:bg-slate-300 hover:bg-opacity-10 cursor-pointer">
-        {icon}
+        {icon && icon}
         <p className="hidden lg:block text-white text-xl">Logout</p>
       </div>
     </div>

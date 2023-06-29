@@ -5,10 +5,12 @@ import FollowBar from "@/components/followbar/FollowBar";
 import Sidebar from "@/components/sidebar/Sidebar";
 import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
-import AuthContext from "@/context/AuthContext";
-import ToasterContext from "@/context/ToasterContext";
 import EditModal from "@/components/modals/EditModal";
-import getCurrentUser from "@/actions/getCurrentUser";
+
+import AuthContext from "./context/AuthContext";
+import ToasterContext from "./context/ToasterContext";
+
+import getCurrentUser from "./actions/getCurrentUser";
 import { User } from "@prisma/client";
 
 const inter = Inter({ subsets: ["latin"] });

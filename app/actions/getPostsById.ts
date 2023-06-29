@@ -1,14 +1,10 @@
-import prisma from "@/libs/prismadb";
-import getSession from "./getSession";
-import getCurrentUser from "./getCurrentUser";
+import prisma from "@/app/libs/prismadb";
 
-const getPostsById = async () => {
+const getPostsById = async ({ userId }: { userId: string }) => {
   try {
-    const currentUser = await getCurrentUser();
-
     const postsById = await prisma.post.findMany({
       where: {
-        userId: currentUser?.id,
+        userId: userId,
       },
       include: {
         user: true,

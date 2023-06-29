@@ -1,6 +1,5 @@
-import prisma from "@/libs/prismadb";
-
-import getSession from "@/actions/getSession";
+import prisma from "@/app/libs/prismadb";
+import getSession from "./getSession";
 
 const getUserById = async (userId: string) => {
   const session = await getSession();
@@ -20,16 +19,16 @@ const getUserById = async (userId: string) => {
       return null;
     }
 
-    const followersCount = await prisma.user.count({
-      where: {
-        followingIds: {
-          has: userId,
-        },
-      },
-    });
+    // const followersCount = await prisma.user.count({
+    //   where: {
+    //     followingIds: {
+    //       has: userId,
+    //     },
+    //   },
+    // });
 
-    return { ...user, followersCount };
-  } catch (error: any) {
+    return user;
+  } catch (error) {
     return null;
   }
 };

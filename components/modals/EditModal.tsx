@@ -1,14 +1,16 @@
 "use client";
 
-import { User } from "@prisma/client";
-import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
+
+import axios from "axios";
+import { User } from "@prisma/client";
 import { toast } from "react-hot-toast";
+
 import Modal from "./Modal";
-import useEditModal from "@/hooks/useEditModal";
 import Input from "../input/Input";
 import Upload from "../input/Upload";
 
+import useEditModal from "@/app/hooks/useEditModal";
 interface EditModalProps {
   currentUser: User;
 }
@@ -23,11 +25,11 @@ const EditModal: React.FC<EditModalProps> = ({ currentUser }) => {
   const [bio, setBio] = useState<string | undefined>("");
 
   useEffect(() => {
-    setProfileImage(currentUser?.profileImage);
-    setCoverImage(currentUser?.coverImage);
-    setName(currentUser?.name);
-    setUsername(currentUser?.username);
-    setBio(currentUser?.bio);
+    setProfileImage(currentUser?.profileImage || undefined);
+    setCoverImage(currentUser?.coverImage || undefined);
+    setName(currentUser?.name || undefined);
+    setUsername(currentUser?.username || undefined);
+    setBio(currentUser?.bio || undefined);
   }, [
     currentUser?.profileImage,
     currentUser?.coverImage,
